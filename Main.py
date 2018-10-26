@@ -16,6 +16,7 @@ Warped = PerspectiveTrans(Binary)
 window_width=50
 window_height = 80
 margin = 80
-masked_Warped = draw_lane_pix(Warped,window_width,window_height,margin)
-plt.imshow(masked_Warped)
+left_lane_x, left_lane_y, right_lane_x, right_lane_y, masked_Warped = draw_lane_pix(Warped, window_width, window_height, margin)
+polyfit_image = fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y, masked_Warped)
+plt.imshow(polyfit_image)
 plt.show()
