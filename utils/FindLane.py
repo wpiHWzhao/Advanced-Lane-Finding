@@ -1,20 +1,24 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+from utils.PerspectiveTrans import *
 import matplotlib.image as mpimg
 
 def find_window(image,window_width,window_height,margin):
     window_center = []
-
+    bottom_lane_position = []
 
     window = np.ones(window_width)
     offset = window_width / 2
+
+    # Start with the first slice on y direction
     l_sum = np.sum(image[int(3*image.shape[0]/4):,:int(image.shape[1]/2)],axis=0)
     l_center = np.argmax(np.convolve(window,l_sum))-offset
 
     r_sum = np.sum(image[int(3*image.shape[0]/4):,int(image.shape[1]/2):],axis=0)
     r_center = np.argmax(np.convolve(window,r_sum))-offset + int(image.shape[1]/2)
     window_center.append((l_center,r_center))
+    bottom_lane_position.append((l_center,r_center))
 
 
 
@@ -31,7 +35,7 @@ def find_window(image,window_width,window_height,margin):
         r_center = np.argmax(convolve[r_min_index:r_max_index]) - offset + r_min_index
         window_center.append((l_center,r_center))
 
-    return window_center
+    return window_center,bottom_lane_position
 
 def make_mask(window_width,window_height,img,centers,slice):
     mask = np.zeros_like(img)
@@ -39,7 +43,7 @@ def make_mask(window_width,window_height,img,centers,slice):
     return mask
 
 def draw_lane_pix(image,window_width,window_height,margin):# Input image need to be a warped one
-    window_center = find_window(image,window_width,window_height,margin)
+    window_center,bottom_lane_position = find_window(image,window_width,window_height,margin)
     left_lane_x =[]
     left_lane_y = []
     right_lane_x = []
@@ -75,16 +79,23 @@ def draw_lane_pix(image,window_width,window_height,margin):# Input image need to
         print("The window_center is not found")
         return None
 
-    return left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img
+    return left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img,bottom_lane_position
 
 
-def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
+def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img,bottom_lane_position):
+
+    ym_per_pix = 30 / 720
+    xm_per_pix = 3.7 / 700
 
     left_fit = np.polyfit(left_lane_y,left_lane_x,2)
     right_fit = np.polyfit(right_lane_y,right_lane_x,2)
 
+    left_fit_real = np.polyfit(left_lane_y*ym_per_pix, left_lane_x*xm_per_pix, 2)
+    right_fit_real = np.polyfit(right_lane_y*ym_per_pix, right_lane_x*xm_per_pix, 2)
+
     ploty = np.linspace(0,masked_img.shape[0]-1,masked_img.shape[0])
 
+    # Fit left and right lane with second order polynomial
     try:
         left_poly_x = left_fit[0]*ploty**2+left_fit[1]*ploty+left_fit[2]
         right_poly_x = right_fit[0]*ploty**2+right_fit[1]*ploty+right_fit[2]
@@ -93,12 +104,38 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
         left_poly_x = ploty**2+ploty
         right_poly_x = ploty**2+ploty
 
-    plt.plot(left_poly_x,ploty,color="red")
-    plt.plot(right_poly_x,ploty,color = "blue")
 
-    return masked_img
+    y_eval = np.max(ploty) * ym_per_pix
 
+    left_R = ((1 + (2 * left_fit_real[0] * y_eval + left_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * left_fit_real[0])
+    right_R = ((1 + (2 * right_fit_real[0] * y_eval + right_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * right_fit_real[0])
 
+    lane_mid = np.average(bottom_lane_position)*xm_per_pix
+    if left_R > right_R:
+        car_R = -np.average([left_R,right_R])
+    else:
+        car_R = np.average([left_R,right_R])
+    car_pos = masked_img.shape[1]/2*xm_per_pix
+    car_offset = car_pos-lane_mid
+
+    return masked_img,car_R,car_offset,left_poly_x,right_poly_x,ploty
+
+def unwarp_with_lane(warped,left_poly_x,right_poly_x,ploty):
+    warped_blank = np.zeros_like(warped).astype(np.uint8)
+
+    color_warped = np.dstack((warped_blank,warped_blank,warped_blank))
+    pts_left = np.array([np.transpose(np.vstack([left_poly_x,ploty]))])
+    pts_right = np.array([np.flipud(np.transpose(np.vstack([right_poly_x,ploty])))])
+    pts = np.hstack((pts_left,pts_right))
+
+    cv2.fillPoly(color_warped,np.int_([pts]),(0,255,0))
+
+    cv2.polylines(color_warped,np.int_([pts_left]), isClosed = False,color=(255,0,0),thickness=20)
+    cv2.polylines(color_warped, np.int_([pts_right]), isClosed=False, color=(0, 0, 255), thickness=20)
+
+    unwarped = InversePerspectiveTrans(color_warped)
+
+    return unwarped
 
 
 def test():
@@ -107,7 +144,8 @@ def test():
     window_height = 80
     margin = 80
     left_lane_x, left_lane_y, right_lane_x, right_lane_y, masked_img = draw_lane_pix(img, window_width, window_height, margin)
-    polyfit_image = fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img)
+    polyfit_image,car_R,car_offset,ploty= fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img)
+    print(car_R,car_offset)
     plt.imshow(polyfit_image)
     plt.show()
 
