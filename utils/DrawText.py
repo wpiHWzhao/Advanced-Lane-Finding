@@ -1,7 +1,19 @@
 import numpy as np
 import cv2
 
-def DrawText(img,car_R,car_offset):
+def DrawText(img,left_R, right_R,bottom_lane_position):
+
+    xm_per_pix = 3.7 / 700
+
+    lane_mid = np.average(bottom_lane_position)*xm_per_pix
+    #print(left_R,right_R)
+    if left_R > right_R:
+        car_R = -np.average([left_R,right_R])
+    else:
+        car_R = np.average([left_R,right_R])
+
+    car_pos = img.shape[1]/2*xm_per_pix
+    car_offset = car_pos-lane_mid
 
     if car_R>0:
         direction_r = 'Left'
