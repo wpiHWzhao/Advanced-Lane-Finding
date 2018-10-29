@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6041af52-65fc-4f7b-8191-215f7b9267ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/CalculateRedius.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/DrawText.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/DrawText.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/FindLane.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/FindLane.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Memory.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Memory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_output/project_video.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/video_output/project_video.mp4" afterDir="false" />
-    </list>
+    <list default="true" id="6041af52-65fc-4f7b-8191-215f7b9267ba" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +12,7 @@
     <session id="-772519284">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="2" />
@@ -63,7 +55,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
+            <state relative-caret-position="697">
               <caret line="243" selection-start-line="243" selection-end-line="247" selection-end-column="53" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
@@ -456,14 +448,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="72" y="-8" width="1849" height="1089" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15329671" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49944752" visible="true" weight="0.25830653" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49944752" weight="0.25830653" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -652,7 +643,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
+        <state relative-caret-position="697">
           <caret line="243" selection-start-line="243" selection-end-line="247" selection-end-column="53" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
