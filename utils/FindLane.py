@@ -107,12 +107,13 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
 
     plt.plot(left_poly_x,ploty,color = 'red')
     plt.plot(right_poly_x,ploty,color = 'blue')
-
+    # For debug
     y_eval = np.max(ploty) * ym_per_pix
 
     left_R = ((1 + (2 * left_fit_real[0] * y_eval + left_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * left_fit_real[0])
     right_R = ((1 + (2 * right_fit_real[0] * y_eval + right_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * right_fit_real[0])
 
+    # print("The output from Find lane is ", left_R,right_R)
     # lane_mid = np.average(bottom_lane_position)*xm_per_pix
     # print(left_R,right_R)
     # if left_R > right_R:
@@ -123,11 +124,10 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
     # car_pos = masked_img.shape[1]/2*xm_per_pix
     # car_offset = car_pos-lane_mid
 
-    return masked_img,left_fit,right_fit,left_R,right_R,ploty
+    return masked_img,left_fit,right_fit# left_R,right_R,ploty
 
-def unwarp_with_lane(warped,left_fit,right_fit,ploty):
-
-
+def unwarp_with_lane(warped,left_fit,right_fit):
+    ploty = np.linspace(0, warped.shape[0] - 1, warped.shape[0])
     left_poly_x = left_fit[0] * ploty ** 2 + left_fit[1] * ploty + left_fit[2]
     right_poly_x = right_fit[0] * ploty ** 2 + right_fit[1] * ploty + right_fit[2]
     warped_blank = np.zeros_like(warped).astype(np.uint8)
@@ -147,7 +147,7 @@ def unwarp_with_lane(warped,left_fit,right_fit,ploty):
     return unwarped
 
 
-def search_around_poly(binary_warped, left_fit, right_fit):
+def search_around_poly(binary_warped, left_fit, right_fit, window_width):
     # HYPERPARAMETER
     # Choose the width of the margin around the previous polynomial to search
     # The quiz grader expects 100 here, but feel free to tune on your own!
@@ -177,8 +177,24 @@ def search_around_poly(binary_warped, left_fit, right_fit):
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds]
 
+    # bottom_lane_position = []
+    #
+    # window = np.ones(window_width)
+    # offset = window_width / 2
+    #
+    # # Start with the first slice on y direction
+    # l_sum = np.sum(binary_warped[int(3*binary_warped.shape[0]/4):,:int(binary_warped.shape[1]/2)],axis=0)
+    # l_center = np.argmax(np.convolve(window,l_sum))-offset
+    #
+    # r_sum = np.sum(binary_warped[int(3*binary_warped.shape[0]/4):,int(binary_warped.shape[1]/2):],axis=0)
+    # r_center = np.argmax(np.convolve(window,r_sum))-offset + int(binary_warped.shape[1]/2)
+    # bottom_lane_position.append((l_center,r_center))
+
+
+    return leftx, lefty, rightx, righty
+
     # Fit new polynomials
-    masked_img, left_fit, right_fit, left_R, right_R, ploty = fit_poly(leftx, lefty, rightx, righty, binary_warped)
+    # masked_img, left_fit, right_fit, left_R, right_R, ploty = fit_poly(leftx, lefty, rightx, righty, binary_warped)
 
     # ## Visualization ##
     # # Create an image to draw on and an image to show the selection window
@@ -209,7 +225,7 @@ def search_around_poly(binary_warped, left_fit, right_fit):
     # plt.plot(right_fitx, ploty, color='yellow')
     # ## End visualization steps ##
 
-    return masked_img, left_fit, right_fit, left_R, right_R, ploty
+    # return masked_img, left_fit, right_fit, left_R, right_R, ploty
 
 
 def test():

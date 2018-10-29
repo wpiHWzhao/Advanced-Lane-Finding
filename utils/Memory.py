@@ -2,7 +2,10 @@ import numpy as np
 from collections import deque
 
 def creat_lane_list():
-    return deque(maxlen=5)
+    return deque(maxlen=30)
+
+def creat_lane_list_real():
+    return deque(maxlen=30)
 
 def left_lane_add(left_lane_que,left_fit,left_bottom):
     left_lane_que.append([left_fit[0],left_fit[1],left_fit[2],left_bottom])
