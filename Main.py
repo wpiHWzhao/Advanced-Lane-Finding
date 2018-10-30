@@ -12,14 +12,19 @@ import operator
 from utils.CalculateRedius import *
 
 
-# str_l1 = plt.imread("test_images/straight_lines1.jpg")
-# str_l2 = plt.imread("test_images/straight_lines2.jpg")
-# test1 = plt.imread('test_images/test1.jpg')
-# test2 = plt.imread('test_images/test2.jpg')
-# test3 = plt.imread('test_images/test3.jpg')
-# test4 = plt.imread('test_images/test4.jpg')
-# test5 = plt.imread('test_images/test5.jpg')
-# test6 = plt.imread('test_images/test6.jpg')
+str_l1 = plt.imread("test_images/straight_lines1.jpg")
+str_l2 = plt.imread("test_images/straight_lines2.jpg")
+test1 = plt.imread('test_images/test1.jpg')
+test2 = plt.imread('test_images/test2.jpg')
+test3 = plt.imread('test_images/test3.jpg')
+test4 = plt.imread('test_images/test4.jpg')
+test5 = plt.imread('test_images/test5.jpg')
+test6 = plt.imread('test_images/test6.jpg')
+
+# This is just for testing purpose
+# project_1 = plt.imread('test_images/001.jpg')
+# project_2 = plt.imread('test_images/002.jpg')
+# project_3 = plt.imread('test_images/003.jpg')
 
 ym_per_pix = 30 / 720
 xm_per_pix = 3.7 / 700
@@ -48,11 +53,13 @@ class AdvanceLaneDetect:
 
     def image_pipline(self,img):
         unDist = Undistort(img, self.objPoints, self.imgPoints)
+        plt.imsave('output_images/test1_unDistorted.png',unDist)
         Binary = Convert2Binary_Sobel_S(unDist)
-        # Binary = Convert2Binary_LAB_L(unDist)
+        plt.imsave('output_images/test1_Binary.png', Binary)
+
         Warped = PerspectiveTrans(Binary)
-        # plt.imshow(Warped)
-        # plt.show()
+        plt.imsave('output_images/test1_Warped.png', Warped)
+
         window_width = 50
         window_height = 80
         margin = 80
@@ -60,20 +67,29 @@ class AdvanceLaneDetect:
                                                                                                                   window_width,
                                                                                                                   window_height,
                                                                                                                   margin)
-        # plt.imshow(masked_Warped)
-        # plt.show()
 
-        polyfit_image, left_fit, right_fit, left_R, right_R, ploty = fit_poly(left_lane_x, left_lane_y,
-                                                                                      right_lane_x, right_lane_y,
-                                                                                      masked_Warped)
-        # plt.imshow(polyfit_image)
-        # plt.show()
+        plt.imsave('output_images/test1_masked_Warped.png', masked_Warped)
 
-        Unwarped_with_lane = unwarp_with_lane(Warped, left_fit, right_fit, ploty)
+
+        polyfit_image, self.left_fit, self.right_fit, = fit_poly(left_lane_x, left_lane_y,right_lane_x, right_lane_y,masked_Warped)
+
+        plt.imsave('output_images/test1_polyfit_Warped.png', polyfit_image)
+
+        polyfit_image_real, self.left_fit_real, self.right_fit_real = fit_poly_real(left_lane_x, left_lane_y,
+                                                                                    right_lane_x, right_lane_y,
+                                                                                    masked_Warped)
+
+        left_bottom = bottom_lane_position[0][0]
+        right_bottom = bottom_lane_position[0][1]
+        bottom_lane_position=[left_bottom,right_bottom]
+
+
+        Unwarped_with_lane = unwarp_with_lane(Warped, self.left_fit, self.right_fit)
+
+        left_R, right_R = CalculateRadius(self.left_fit_real,self.right_fit_real,masked_Warped)
         result = cv2.addWeighted(unDist, 1, Unwarped_with_lane, 0.3, 0)
-
-        result = DrawText(result, left_R,right_R, bottom_lane_position)
-
+        result = DrawText(result, left_R, right_R, bottom_lane_position)
+        plt.imsave('output_images/test1_result.png', result)
         return result
 
     def video_pipline(self,img):
@@ -95,25 +111,9 @@ class AdvanceLaneDetect:
                                                                                                                   window_height,
                                                                                                                   margin)
 
-        # left_lane_x, left_lane_y, right_lane_x, right_lane_y, bottom_lane_position = draw_lane_pix(
-        #     Warped,
-        #     window_width,
-        #     window_height,
-        #     margin)
-        # print(bottom_lane_position[0][0])
 
         left_bottom = bottom_lane_position[0][0]
         right_bottom = bottom_lane_position[0][1]
-        # plt.imshow(masked_Warped)
-        # plt.show()
-
-        # Compute the polynomial of this frame
-        # polyfit_image, left_fit, right_fit, left_R, right_R, ploty = fit_poly(left_lane_x, left_lane_y,
-        #                                                                               right_lane_x, right_lane_y,
-        #                                                                               masked_Warped)
-
-        # plt.imshow(polyfit_image)
-        # plt.show()
 
         # Check if it is a bad frame. If it is a bad frame, then use mean value of in the memory
         if len(self.left_lane_que) == 0 and len(self.right_lane_que) == 0:
@@ -195,11 +195,8 @@ class AdvanceLaneDetect:
 
 
 
-        ## To-do: Smooth the radius
-        bottom_lane_position=[left_bottom_mean,right_bottom_mean]
-        # plt.imshow(polyfit_image)
-        # plt.show()
 
+        bottom_lane_position=[left_bottom_mean,right_bottom_mean]
 
         Unwarped_with_lane = unwarp_with_lane(Warped, left_fit_mean, right_fit_mean)
         left_R, right_R = CalculateRadius(left_fit_mean_real,right_fit_mean_real,masked_Warped)
@@ -210,23 +207,31 @@ class AdvanceLaneDetect:
 
 
 
-#AdvanceLaneDetect_image = AdvanceLaneDetect()
-# Final_str_l1 = AdvanceLaneDetect_image.pipline(str_l1)
+AdvanceLaneDetect_image = AdvanceLaneDetect()
+# Final_str_l1 = AdvanceLaneDetect_image.image_pipline(str_l1)
 # plt.imsave('output_images/straight_lines1.png',Final_str_l1)
-# Final_str_l2 = AdvanceLaneDetect_image.pipline(str_l2)
+# Final_str_l2 = AdvanceLaneDetect_image.image_pipline(str_l2)
 # plt.imsave('output_images/straight_lines2.png',Final_str_l2)
-# Final_test1 = AdvanceLaneDetect_image.pipline(test1)
-# plt.imsave('output_images/test1.png',Final_test1)
-# Final_test2 = AdvanceLaneDetect_image.pipline(test2)
+Final_test1 = AdvanceLaneDetect_image.image_pipline(test1)
+plt.imsave('output_images/test1.png',Final_test1)
+# Final_test2 = AdvanceLaneDetect_image.image_pipline(test2)
 # plt.imsave('output_images/test2.png',Final_test2)
-# Final_test3 = AdvanceLaneDetect_image.pipline(test3)
+# Final_test3 = AdvanceLaneDetect_image.image_pipline(test3)
 # plt.imsave('output_images/test3.png',Final_test3)
-# Final_test4 = AdvanceLaneDetect_image.pipline(test4)
+# Final_test4 = AdvanceLaneDetect_image.image_pipline(test4)
 # plt.imsave('output_images/test4.png',Final_test4)
-#Final_test5 = AdvanceLaneDetect_image.pipline(test5)
-#plt.imsave('output_images/test5.png',Final_test5)
-# Final_test6 = AdvanceLaneDetect_image.pipline(test6)
+# Final_test5 = AdvanceLaneDetect_image.image_pipline(test5)
+# plt.imsave('output_images/test5.png',Final_test5)
+# Final_test6 = AdvanceLaneDetect_image.image_pipline(test6)
 # plt.imsave('output_images/test6.png',Final_test6)
+
+## This is just for testing purpose
+# Final_project_1 = AdvanceLaneDetect_image.image_pipline(project_1)
+# plt.imsave('output_images/001.png',Final_project_1)
+# Final_project_2 = AdvanceLaneDetect_image.image_pipline(project_2)
+# plt.imsave('output_images/002.png',Final_project_2)
+# Final_project_3 = AdvanceLaneDetect_image.image_pipline(project_3)
+# plt.imsave('output_images/003.png',Final_project_3)
 
 
 # Detect = AdvanceLaneDetect()
@@ -241,8 +246,8 @@ class AdvanceLaneDetect:
 # white_clip = clip1.fl_image(Detect_ch.video_pipline) #NOTE: this function expects color images!!
 # white_clip.write_videofile(white_output, audio=False)
 
-Detect_harder_ch = AdvanceLaneDetect()
-white_output = 'video_output/harder_challenge_video.mp4'
-clip1 = VideoFileClip('harder_challenge_video.mp4')
-white_clip = clip1.fl_image(Detect_harder_ch.video_pipline) #NOTE: this function expects color images!!
-white_clip.write_videofile(white_output, audio=False)
+# Detect_harder_ch = AdvanceLaneDetect()
+# white_output = 'video_output/harder_challenge_video.mp4'
+# clip1 = VideoFileClip('harder_challenge_video.mp4')
+# white_clip = clip1.fl_image(Detect_harder_ch.video_pipline) #NOTE: this function expects color images!!
+# white_clip.write_videofile(white_output, audio=False)

@@ -105,13 +105,21 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
         left_poly_x = ploty**2+ploty
         right_poly_x = ploty**2+ploty
 
-    plt.plot(left_poly_x,ploty,color = 'red')
-    plt.plot(right_poly_x,ploty,color = 'blue')
+    
     # For debug
-    y_eval = np.max(ploty) * ym_per_pix
+    # plt.plot(left_poly_x,ploty,color = 'red')
+    # plt.plot(right_poly_x,ploty,color = 'blue')
 
-    left_R = ((1 + (2 * left_fit_real[0] * y_eval + left_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * left_fit_real[0])
-    right_R = ((1 + (2 * right_fit_real[0] * y_eval + right_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * right_fit_real[0])
+    pts_left = np.array([np.transpose(np.vstack([left_poly_x,ploty]))])
+    pts_right = np.array([np.flipud(np.transpose(np.vstack([right_poly_x,ploty])))])
+
+    cv2.polylines(masked_img,np.int_([pts_left]), isClosed = False,color=(255,0,0),thickness=20)
+    cv2.polylines(masked_img, np.int_([pts_right]), isClosed=False, color=(0, 0, 255), thickness=20)
+    # For debug
+    # y_eval = np.max(ploty) * ym_per_pix
+    #
+    # left_R = ((1 + (2 * left_fit_real[0] * y_eval + left_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * left_fit_real[0])
+    # right_R = ((1 + (2 * right_fit_real[0] * y_eval + right_fit_real[1]) ** 2) ** (3 / 2)) / np.absolute(2 * right_fit_real[0])
 
     # print("The output from Find lane is ", left_R,right_R)
     # lane_mid = np.average(bottom_lane_position)*xm_per_pix
@@ -148,9 +156,7 @@ def unwarp_with_lane(warped,left_fit,right_fit):
 
 
 def search_around_poly(binary_warped, left_fit, right_fit, window_width):
-    # HYPERPARAMETER
-    # Choose the width of the margin around the previous polynomial to search
-    # The quiz grader expects 100 here, but feel free to tune on your own!
+
     margin = 100
 
     # Grab activated pixels
@@ -158,10 +164,7 @@ def search_around_poly(binary_warped, left_fit, right_fit, window_width):
     nonzeroy = np.array(nonzero[0])
     nonzerox = np.array(nonzero[1])
 
-    ### TO-DO: Set the area of search based on activated x-values ###
-    ### within the +/- margin of our polynomial function ###
-    ### Hint: consider the window areas for the similarly named variables ###
-    ### in the previous quiz, but change the windows to our new search area ###
+
     left_lane_inds = ((nonzerox > (left_fit[0] * (nonzeroy ** 2) + left_fit[1] * nonzeroy +
                                    left_fit[2] - margin)) & (nonzerox < (left_fit[0] * (nonzeroy ** 2) +
                                                                          left_fit[1] * nonzeroy + left_fit[
@@ -196,7 +199,7 @@ def search_around_poly(binary_warped, left_fit, right_fit, window_width):
     # Fit new polynomials
     # masked_img, left_fit, right_fit, left_R, right_R, ploty = fit_poly(leftx, lefty, rightx, righty, binary_warped)
 
-    # ## Visualization ##
+    # ## Visualization. # Todo: this part has problem
     # # Create an image to draw on and an image to show the selection window
     # out_img = np.dstack((binary_warped, binary_warped, binary_warped)) * 255
     # window_img = np.zeros_like(out_img)
@@ -229,6 +232,7 @@ def search_around_poly(binary_warped, left_fit, right_fit, window_width):
 
 
 def test():
+    # Only for debug
     img = plt.imread("warped_example.jpg")
     window_width = 50
     window_height = 80

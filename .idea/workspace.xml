@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6041af52-65fc-4f7b-8191-215f7b9267ba" name="Default Changelist" comment="" />
+    <list default="true" id="6041af52-65fc-4f7b-8191-215f7b9267ba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/save_output_here.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/straight_lines1.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/straight_lines1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/straight_lines2.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/straight_lines2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test1.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test2.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test3.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test4.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test5.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_images/test6.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_images/test6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/CalculateRedius.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/CalculateRedius.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Calibartion.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Calibartion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/DrawText.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/DrawText.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/FindLane.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/FindLane.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Memory.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Memory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/PerspectiveTrans.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/PerspectiveTrans.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_output/harder_challenge_video.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/video_output/harder_challenge_video.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_output/project_video.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/video_output/project_video.mp4" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,33 +38,35 @@
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ipynb" value="1" />
           <entry key="jpg" value="16" />
-          <entry key="py" value="32" />
+          <entry key="png" value="4" />
+          <entry key="py" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IPNB" value="1" />
-          <entry key="Image" value="16" />
-          <entry key="Python" value="32" />
+          <entry key="Image" value="20" />
+          <entry key="Python" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="506" />
-          <entry key="py" value="13214" />
+          <entry key="py" value="13829" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="13720" />
+          <entry key="Python" value="14335" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -55,10 +77,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="243" selection-start-line="243" selection-end-line="247" selection-end-column="53" />
+            <state relative-caret-position="396">
+              <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="64" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
+                <marker date="1540868468303" expanded="true" signature="11520:11795" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/FindLane.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1605">
+              <caret line="107" column="4" selection-start-line="107" selection-start-column="4" selection-end-line="107" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <marker date="1540868889912" expanded="true" signature="190:195" ph="..." />
+                <marker date="1540868889912" expanded="true" signature="1626:1849" ph="..." />
+                <marker date="1540868889912" expanded="true" signature="1908:1950" ph="..." />
               </folding>
             </state>
           </provider>
@@ -67,7 +105,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/Convert2Binary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="210">
               <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -79,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/DrawText.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -91,25 +129,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/CalculateRedius.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="26" />
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
-                <marker date="1540748034568" expanded="true" signature="845:846" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/FindLane.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="949">
-              <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <marker date="1540748995969" expanded="true" signature="190:195" ph="..." />
-                <marker date="1540748995969" expanded="true" signature="1626:1849" ph="..." />
-                <marker date="1540748995969" expanded="true" signature="1908:1950" ph="..." />
+                <marker date="1540869089980" expanded="true" signature="486:487" ph="..." />
               </folding>
             </state>
           </provider>
@@ -118,15 +141,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/Memory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="420">
+              <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1540782096689" expanded="true" signature="72:77" ph="..." />
-                <marker date="1540782096689" expanded="true" signature="129:159" ph="..." />
-                <marker date="1540782096689" expanded="true" signature="213:218" ph="..." />
-                <marker date="1540782096689" expanded="true" signature="374:379" ph="..." />
-                <marker date="1540782096689" expanded="true" signature="517:522" ph="..." />
+                <marker date="1540865412184" expanded="true" signature="72:77" ph="..." />
+                <marker date="1540865412184" expanded="true" signature="129:159" ph="..." />
+                <marker date="1540865412184" expanded="true" signature="213:218" ph="..." />
+                <marker date="1540865412184" expanded="true" signature="374:379" ph="..." />
+                <marker date="1540865412184" expanded="true" signature="517:522" ph="..." />
               </folding>
             </state>
           </provider>
@@ -135,13 +158,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/PerspectiveTrans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+            <state relative-caret-position="375">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1540762027927" expanded="true" signature="122:127" ph="..." />
-                <marker date="1540762027927" expanded="true" signature="872:1627" ph="..." />
-                <marker date="1540762027927" expanded="true" signature="1638:1643" ph="..." />
+                <marker date="1540869089956" expanded="true" signature="122:127" ph="..." />
+                <marker date="1540869089956" expanded="true" signature="537:957" ph="..." />
+                <marker date="1540869089956" expanded="true" signature="968:973" ph="..." />
               </folding>
             </state>
           </provider>
@@ -150,8 +173,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/Calibartion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="525">
+              <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -184,32 +207,33 @@
         <option value="$PROJECT_DIR$/camera_cal/Calibartion.py" />
         <option value="$PROJECT_DIR$/Camera Cal/Calibartion.py" />
         <option value="$PROJECT_DIR$/CameraCal_Function/Calibartion.py" />
-        <option value="$PROJECT_DIR$/utils/Calibartion.py" />
         <option value="$PROJECT_DIR$/utils/Test.py" />
         <option value="$PROJECT_DIR$/utils/FitPoly.py" />
         <option value="$PROJECT_DIR$/utils/Unwarp.py" />
         <option value="$PROJECT_DIR$/utils/Convert2Binary.py" />
         <option value="$PROJECT_DIR$/utils/FindAroundPoly.py" />
-        <option value="$PROJECT_DIR$/utils/CalculateRedius.py" />
-        <option value="$PROJECT_DIR$/utils/FindLane.py" />
-        <option value="$PROJECT_DIR$/utils/PerspectiveTrans.py" />
         <option value="$PROJECT_DIR$/utils/Memory.py" />
-        <option value="$PROJECT_DIR$/utils/DrawText.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/utils/FindLane.py" />
+        <option value="$PROJECT_DIR$/utils/DrawText.py" />
+        <option value="$PROJECT_DIR$/utils/CalculateRedius.py" />
+        <option value="$PROJECT_DIR$/utils/PerspectiveTrans.py" />
+        <option value="$PROJECT_DIR$/utils/Calibartion.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="234" />
-    <option name="y" value="39" />
-    <option name="width" value="928" />
-    <option name="height" value="1052" />
+    <option name="x" value="281" />
+    <option name="y" value="60" />
+    <option name="width" value="926" />
+    <option name="height" value="1016" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,7 +260,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -447,14 +470,15 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="-8" width="1849" height="1089" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15329671" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15720524" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49944752" weight="0.25830653" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49944752" visible="true" weight="0.33577406" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -560,32 +584,18 @@
     <entry file="file://$PROJECT_DIR$/utils/Unwarp.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/Calibartion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/output_images/002.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/PerspectiveTrans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1540762027927" expanded="true" signature="122:127" ph="..." />
-            <marker date="1540762027927" expanded="true" signature="872:1627" ph="..." />
-            <marker date="1540762027927" expanded="true" signature="1638:1643" ph="..." />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/output_images/001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_images/003.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/Convert2Binary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
+        <state relative-caret-position="210">
           <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -593,48 +603,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/CalculateRedius.py">
+    <entry file="file://$PROJECT_DIR$/utils/DrawText.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="26" />
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
-            <marker date="1540748034568" expanded="true" signature="845:846" ph="..." />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/FindLane.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="949">
-          <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+        <state relative-caret-position="1605">
+          <caret line="107" column="4" selection-start-line="107" selection-start-column="4" selection-end-line="107" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1540748995969" expanded="true" signature="190:195" ph="..." />
-            <marker date="1540748995969" expanded="true" signature="1626:1849" ph="..." />
-            <marker date="1540748995969" expanded="true" signature="1908:1950" ph="..." />
+            <marker date="1540868889912" expanded="true" signature="190:195" ph="..." />
+            <marker date="1540868889912" expanded="true" signature="1626:1849" ph="..." />
+            <marker date="1540868889912" expanded="true" signature="1908:1950" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/CalculateRedius.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <marker date="1540869089980" expanded="true" signature="486:487" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/Memory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        <state relative-caret-position="420">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1540782096689" expanded="true" signature="72:77" ph="..." />
-            <marker date="1540782096689" expanded="true" signature="129:159" ph="..." />
-            <marker date="1540782096689" expanded="true" signature="213:218" ph="..." />
-            <marker date="1540782096689" expanded="true" signature="374:379" ph="..." />
-            <marker date="1540782096689" expanded="true" signature="517:522" ph="..." />
+            <marker date="1540865412184" expanded="true" signature="72:77" ph="..." />
+            <marker date="1540865412184" expanded="true" signature="129:159" ph="..." />
+            <marker date="1540865412184" expanded="true" signature="213:218" ph="..." />
+            <marker date="1540865412184" expanded="true" signature="374:379" ph="..." />
+            <marker date="1540865412184" expanded="true" signature="517:522" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/DrawText.py">
+    <entry file="file://$PROJECT_DIR$/utils/PerspectiveTrans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="375">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1540869089956" expanded="true" signature="122:127" ph="..." />
+            <marker date="1540869089956" expanded="true" signature="537:957" ph="..." />
+            <marker date="1540869089956" expanded="true" signature="968:973" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/Calibartion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -643,10 +676,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="243" selection-start-line="243" selection-end-line="247" selection-end-column="53" />
+        <state relative-caret-position="396">
+          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="64" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
+            <marker date="1540868468303" expanded="true" signature="11520:11795" ph="..." />
           </folding>
         </state>
       </provider>

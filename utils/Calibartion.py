@@ -2,10 +2,14 @@ import numpy as np
 import cv2
 import glob
 import matplotlib.pyplot as plt
+import os
 import matplotlib.image as mping
 
 def Derive_Points_from_board():
     images = glob.glob("camera_cal/calibration*.jpg")
+    # output_dir = 'output_images_calibration/'
+    # output_names = os.listdir("output_images_calibration/")
+    # output_names = list(map(lambda name: output_dir + name, output_names))
 
     #images = glob.glob("../camera_cal/calibration*.jpg") # This line is for test mode.Uncomment it if you need
 
@@ -28,9 +32,8 @@ def Derive_Points_from_board():
             imgPoints.append(corners)
             objPoints.append(objp)
 
-            #img_draw = cv2.drawChessboardCorners(img, (9, 6), corners, ret)
-            #cv2.imshow("1",img_draw)
-            #cv2.waitKey(0)
+            img_draw = cv2.drawChessboardCorners(img, (9, 6), corners, ret)
+            plt.imsave('output_images_calibration/'+image+'.png', img_draw)
     #print(objPoints)
     return objPoints, imgPoints
 

@@ -2,7 +2,7 @@ import numpy as np
 from collections import deque
 
 def creat_lane_list():
-    return deque(maxlen=30)
+    return deque(maxlen=15)
 
 def creat_lane_list_real():
     return deque(maxlen=30)

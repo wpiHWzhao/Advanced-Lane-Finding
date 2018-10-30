@@ -9,14 +9,6 @@ def PerspectiveTrans(img):
     dst = np.float32([[0, 0], [1280, 0],
                       [1250, 720], [40, 720]])
 
-    # src = np.float32([(575, 464),
-    #                   (707, 464),
-    #                   (258, 682),
-    #                   (1049, 682)])
-    # dst = np.float32([(450, 0),
-    #                   (img.shape[1] - 450, 0),
-    #                   (450, img.shape[0]),
-    #                   (img.shape[1] - 450, img.shape[0])])
 
     M =cv2.getPerspectiveTransform(src,dst)
     if M is not None:
@@ -31,14 +23,6 @@ def InversePerspectiveTrans(img):
     src = np.float32([[0, 0], [1280, 0],
                       [1250, 720], [40, 720]])
 
-    # dst = np.float32([(575, 464),
-    #                   (707, 464),
-    #                   (258, 682),
-    #                   (1049, 682)])
-    # src = np.float32([(450, 0),
-    #                   (img.shape[1] - 450, 0),
-    #                   (450, img.shape[0]),
-    #                   (img.shape[1] - 450, img.shape[0])])
 
     Minv = cv2.getPerspectiveTransform(src, dst)
     if Minv is not None:
