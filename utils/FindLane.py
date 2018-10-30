@@ -1,9 +1,16 @@
+## Udacity Project: Advance Lane Finding.
+# This code is for find lane pixels and calculate polynomials.
+# Developed by Haowei Zhao, Oct, 2018.
+
+
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from utils.PerspectiveTrans import *
 import matplotlib.image as mpimg
 
+
+# Use convolution to find lane centers
 def find_window(image,window_width,window_height,margin):
     window_center = []
     bottom_lane_position = []
@@ -20,8 +27,6 @@ def find_window(image,window_width,window_height,margin):
     window_center.append((l_center,r_center))
     bottom_lane_position.append((l_center,r_center))
 
-
-
     for slice_y_ind in range(1,int(image.shape[0]/window_height)):
         image_y_slice = np.sum(image[int(image.shape[0]-(slice_y_ind+1)*window_height):int(image.shape[0]-slice_y_ind*window_height),:],axis=0)
         convolve = np.convolve(window,image_y_slice)
@@ -37,11 +42,12 @@ def find_window(image,window_width,window_height,margin):
 
     return window_center,bottom_lane_position
 
+# Search around lane centers. High value should be lane pixels.
 def make_mask(window_width,window_height,img,centers,slice):
     mask = np.zeros_like(img)
     mask[int(img.shape[0]-(slice+1)*window_height):int(img.shape[0]-slice*window_height),max(int(centers-window_width/2),0):min(int(centers+window_width/2),img.shape[1])] = 1
     return mask
-
+# For visualization purpose. Draw the area of interests on warped image.
 def draw_lane_pix(image,window_width,window_height,margin):# Input image need to be a warped one
     window_center,bottom_lane_position = find_window(image,window_width,window_height,margin)
     left_lane_x =[]
@@ -49,11 +55,14 @@ def draw_lane_pix(image,window_width,window_height,margin):# Input image need to
     right_lane_x = []
     right_lane_y = []
     if window_center is not None:
+
         l_points = np.zeros_like(image)
         r_points = np.zeros_like(image)
 
         for slice_y_ind in range(0,int(image.shape[0]/window_height)):
             l_mask = make_mask(window_width,window_height,image,window_center[slice_y_ind][0],slice_y_ind)
+
+
             r_mask = make_mask(window_width,window_height,image,window_center[slice_y_ind][1],slice_y_ind)
 
             l_points[(l_mask == 1)] = 255
@@ -71,8 +80,12 @@ def draw_lane_pix(image,window_width,window_height,margin):# Input image need to
         right_lane_y = np.concatenate(right_lane_y)
 
         image_position_of_windows_channel = np.array(l_points+r_points,np.uint8)
+
         zero_channel = np.zeros_like(image_position_of_windows_channel)
-        image_position_of_windows = np.array(cv2.merge((zero_channel,image_position_of_windows_channel,zero_channel)),np.uint8)
+        image_position_of_windows = np.array(cv2.merge((zero_channel,image_position_of_windows_channel,zero_channel)),np.uint8) # Make the pixel in the window green
+
+        image_position_of_windows = np.asarray(image_position_of_windows,np.float64)# Uncomment this
+
         color_img = np.dstack((image,image,image))*255
         masked_img = cv2.addWeighted(color_img,1,image_position_of_windows,0.5,0)
     else:
@@ -80,19 +93,22 @@ def draw_lane_pix(image,window_width,window_height,margin):# Input image need to
         return None
 
     return left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img,bottom_lane_position
-    # return left_lane_x, left_lane_y, right_lane_x, right_lane_y, bottom_lane_position
 
 
+# Calculate left and right polynomial to fit the lane
 def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
 
-    ym_per_pix = 30 / 720
-    xm_per_pix = 3.7 / 700
+    # For testing purpose
+    # ym_per_pix = 30 / 720
+    # xm_per_pix = 3.7 / 700
 
     left_fit = np.polyfit(left_lane_y,left_lane_x,2)
     right_fit = np.polyfit(right_lane_y,right_lane_x,2)
 
-    left_fit_real = np.polyfit(left_lane_y*ym_per_pix, left_lane_x*xm_per_pix, 2)
-    right_fit_real = np.polyfit(right_lane_y*ym_per_pix, right_lane_x*xm_per_pix, 2)
+
+    # For testing purpose
+    # left_fit_real = np.polyfit(left_lane_y*ym_per_pix, left_lane_x*xm_per_pix, 2)
+    # right_fit_real = np.polyfit(right_lane_y*ym_per_pix, right_lane_x*xm_per_pix, 2)
 
     ploty = np.linspace(0,masked_img.shape[0]-1,masked_img.shape[0])
 
@@ -105,7 +121,7 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
         left_poly_x = ploty**2+ploty
         right_poly_x = ploty**2+ploty
 
-    
+
     # For debug
     # plt.plot(left_poly_x,ploty,color = 'red')
     # plt.plot(right_poly_x,ploty,color = 'blue')
@@ -115,6 +131,8 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
 
     cv2.polylines(masked_img,np.int_([pts_left]), isClosed = False,color=(255,0,0),thickness=20)
     cv2.polylines(masked_img, np.int_([pts_right]), isClosed=False, color=(0, 0, 255), thickness=20)
+
+
     # For debug
     # y_eval = np.max(ploty) * ym_per_pix
     #
@@ -132,8 +150,9 @@ def fit_poly(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):
     # car_pos = masked_img.shape[1]/2*xm_per_pix
     # car_offset = car_pos-lane_mid
 
-    return masked_img,left_fit,right_fit# left_R,right_R,ploty
+    return masked_img,left_fit,right_fit
 
+# Unwarp the image back to original perspective
 def unwarp_with_lane(warped,left_fit,right_fit):
     ploty = np.linspace(0, warped.shape[0] - 1, warped.shape[0])
     left_poly_x = left_fit[0] * ploty ** 2 + left_fit[1] * ploty + left_fit[2]
@@ -154,7 +173,7 @@ def unwarp_with_lane(warped,left_fit,right_fit):
 
     return unwarped
 
-
+#   If we have the first frame lane center position, we would only search around it.
 def search_around_poly(binary_warped, left_fit, right_fit, window_width):
 
     margin = 100

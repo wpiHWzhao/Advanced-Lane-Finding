@@ -1,3 +1,8 @@
+## Udacity Project: Advance Lane Finding.
+# This is to calculate the lane radius.
+# Developed by Haowei Zhao, Oct, 2018.
+
+
 import numpy as np
 
 def fit_poly_real(left_lane_x,left_lane_y,right_lane_x,right_lane_y,masked_img):

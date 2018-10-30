@@ -1,3 +1,8 @@
+## Udacity Project: Advance Lane Finding.
+# The lane memory to smoothen the result.
+# Developed by Haowei Zhao, Oct, 2018.
+
+
 import numpy as np
 from collections import deque
 

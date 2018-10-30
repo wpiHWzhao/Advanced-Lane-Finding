@@ -1,39 +1,76 @@
-## Advanced Lane Finding
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+# Advanced Lane Finding
+## Udacity Self Driving Car Engineer Nano Degree Project 
+![Final Result Gif](project_gif/project.gif)
 
+The project is to develop a video processing pipline which can take a video stream from a foward-facing camera, annotated video which identifies:
+- The positions of the lane lines 
+- The location of the vehicle relative to the center of the lane
+- The radius of curvature of the road
 
-In this project, your goal is to write a software pipeline to identify the lane boundaries in a video, but the main output or product we want you to create is a detailed writeup of the project.  Check out the [writeup template](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup.  
+The pipeline can be briefly described as follows:
+- **Step 1**: Apply camera distortion correction using OpenCV and chessboard images.
+- **Step 2**: Apply OpenCV functions and HSL color space to transform the color image into a binary one.
+- **Step 3**: Apply perspective transformation to transform the forward-facing view to a brid-eye view (warped image).
+- **Step 4**: Identify the lane line pixels and fit in a second order polynomial
+- **Step 5**: Assuming parameters of the lane would change drastically, use the mean values of polynomials int the previous frames to smoth the result.
+- **Step 6**: Calculate the radius of the polynomial in world frame. 
+- **Step 7**: Plot the result on the warped image and transform back to a front facing view.
+## Some Details:
+### Step 1:
+#####Code path: `utils/Calibration.py`
+Key funtions: 
+cv2.findChessboardCorners() - This function would find the positions of all points on the chessboard. Results are in `output_images_calibration/camera_cal`
+**A chessbord with image drawn:**
+![Chess Board Points](output_images_calibration/camera_cal/calibration6.png)
+`cv2.calibrateCamera()`- This function would give us the camera matrix and distortion coefficients. 
+`cv2.undistort()`- This would take camera matrix and distortion coefficients as input, and undistort a image.
+**Original image:**
+![Distorded Image](test_images/test1.jpg)
+**Undistorted Image:**
+![Undistorded Image](output_images/test1_unDistorted.png)
+### Step 2:
+##### Code path: `utils/Convert2Binary.py`
+Key functions:
+`cv2.cvtColor(img, cv2.COLOR_RGB2HLS)`- White lines and yellow lines are more clear in S channel and it has the minimal effect of light condition. 
+`cv2.Sobel()`- This funtion can calculate the gradiant along x or y axis. Because the lane is always vertical in the image, we would calculate the gradiant along x axis.
 
-Creating a great writeup:
----
-A great writeup should include the rubric points as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
+Then we would combine this two method to get a better result.
+**Binary image**:
+![Binary Image](output_images/test1_Binary.png)
 
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
+### Step 3:
+##### Code path:`utils/PerspectiveTrans.py`
+Key functions: 
+`cv2.warpPerspective()`- This function would allow us change to a bird eye view. The transformed area of original image should be our 'area of interest'
+**Bird-eye View**:
+![Warped Image](output_images/test1_Warped.png)
+### Step 4:
+##### Code path:`utils/FindLane.py`
+I primaryly used convolution to identify where the lane centers are. The convolution value should be highest when we reach the center of each lane lines. And we would go though each thin layer in y direction to identify where the lane pixels are. 
+**Identify the Lane Lines:**
+![Masked Image](output_images/test1_masked_Warped.png)
+Then, we can try to fit a second order polynomial to each line:
+**Fit polynomials:**
+![Poly Image](output_images/test1_polyfit_Warped.png)
+### Step 5:
+##### Code path: `utils/Memory.py`
+I used `deque` to store pervious frame polynomials' coefficients.
+### Step 6:
+##### Code path: `utils/CalculateRedius.py`
+This [Wiki](https://en.wikipedia.org/wiki/Radius_of_curvature) gives a method to calculate the radius of curve. 
+### Step7:
+##### Code path: `utils/PerspectiveTrans.py` and `utils/DrawText.py`
+Key function:`cv2.warpPerspective()`-Again, we would use this function to do a inverse transformation. And plot the result back to the original picture. Also, I annotate the picture by `DrawTest.py`
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
+**Final Result:**
+![Result Image](output_images/test1_result.png)
 
-The Project
----
+## Future Improvements:
+The code cannot work properly on the `challenge_video.mp4`, mainly because there is a diverging line that `Sobel` function would consider as lane:
+![Final Result Gif](project_gif/challenge.gif)
 
-The goals / steps of this project are the following:
-
-* Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
-* Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
-* Warp the detected lane boundaries back onto the original image.
-* Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
-
-The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  If you want to extract more test images from the videos, you can simply use an image writing method like `cv2.imwrite()`, i.e., you can read the video in frame by frame as usual, and for frames you want to save for later you can write to an image file.  
-
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `output_images`, and include a description in your writeup for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
-
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
-
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
+To cope with this, I propose to use [LAB color space](https://en.wikipedia.org/wiki/CIELAB_color_space), which would seperate yellow color and white color, without the influence of gradients:
+**Original Image:**
+![Challenge Image](challenge_images/challenge.jpg)
+**Binary Image:**
+![Challenge Binary Image](challenge_outputs/challenge_Binary.png)

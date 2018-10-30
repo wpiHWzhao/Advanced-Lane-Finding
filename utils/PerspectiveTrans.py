@@ -1,9 +1,16 @@
+## Udacity Project: Advance Lane Finding.
+# Perspective Transformation.
+# Developed by Haowei Zhao, Oct, 2018.
+
+
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 def PerspectiveTrans(img):
+
+    # src and dst are only empirical values
     src = np.float32([[490, 480], [810, 480],
                       [1250, 720], [40, 720]])
     dst = np.float32([[0, 0], [1280, 0],
@@ -15,6 +22,7 @@ def PerspectiveTrans(img):
         warped = cv2.warpPerspective(img,M,(img.shape[1],img.shape[0]))
     else:
         print("The M is none")
+        return None
     return warped
 
 def InversePerspectiveTrans(img):

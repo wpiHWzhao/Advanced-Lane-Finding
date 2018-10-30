@@ -1,3 +1,7 @@
+## Udacity Project: Advance Lane Finding.
+# This code is for camera calibration.
+# Developed by Haowei Zhao, Oct, 2018.
+
 import numpy as np
 import cv2
 import glob
@@ -7,9 +11,6 @@ import matplotlib.image as mping
 
 def Derive_Points_from_board():
     images = glob.glob("camera_cal/calibration*.jpg")
-    # output_dir = 'output_images_calibration/'
-    # output_names = os.listdir("output_images_calibration/")
-    # output_names = list(map(lambda name: output_dir + name, output_names))
 
     #images = glob.glob("../camera_cal/calibration*.jpg") # This line is for test mode.Uncomment it if you need
 
@@ -34,7 +35,7 @@ def Derive_Points_from_board():
 
             img_draw = cv2.drawChessboardCorners(img, (9, 6), corners, ret)
             plt.imsave('output_images_calibration/'+image+'.png', img_draw)
-    #print(objPoints)
+
     return objPoints, imgPoints
 
 def Undistort(img,objPoints,imgPoints):
@@ -50,6 +51,7 @@ def Undistort(img,objPoints,imgPoints):
         dst = cv2.undistort(img,mtx,dist,None,mtx)
     else:
         print('Calibration Failed')
+        return None
 
     return dst
 def test():
